@@ -11,7 +11,12 @@ import java.util.List;
 @Service
 public class FlightService {
     @Autowired
-    public IFlightRepository iFlightRepository;
+    private final IFlightRepository iFlightRepository;
+
+    @Autowired
+    public FlightService(IFlightRepository iFlightRepository) {
+        this.iFlightRepository = iFlightRepository;
+    }
 
     public List<Flight> getAllFlights() {
         return iFlightRepository.findAll();

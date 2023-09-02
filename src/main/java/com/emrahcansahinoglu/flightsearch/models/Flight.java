@@ -9,11 +9,13 @@ public class Flight {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "departureAirport")
-    private String departureAirport;
+    @ManyToOne
+    @JoinColumn(name = "departureAirportId")
+    private Airport departureAirport;
 
-    @Column(name = "arrivalAirport")
-    private String arrivalAirport;
+    @ManyToOne
+    @JoinColumn(name = "arrivalAirportId")
+    private Airport arrivalAirport;
 
     @Column(name = "departureTime")
     private String departureTime;
@@ -28,10 +30,7 @@ public class Flight {
     private String currency;
 
     public Flight() {}
-    public Flight(long id, String departureAirport,
-                  String arrivalAirport, String departureTime,
-                  String arrivalTime, double price, String currency) {
-        this.id = id;
+    public Flight(Airport departureAirport, Airport arrivalAirport, String departureTime, String arrivalTime, double price, String currency) {
         this.departureAirport = departureAirport;
         this.arrivalAirport = arrivalAirport;
         this.departureTime = departureTime;
@@ -44,17 +43,34 @@ public class Flight {
         return id;
     }
 
-    public String getDepartureAirport() {
+//    public String getDepartureAirport() {
+//        return departureAirport;
+//    }
+//    public void setDepartureAirport(String departureAirport) {
+//        this.departureAirport = departureAirport;
+//    }
+//
+//    public String getArrivalAirport() {
+//        return arrivalAirport;
+//    }
+//    public void setArrivalAirport(String arrivalAirport) {
+//        this.arrivalAirport = arrivalAirport;
+//    }
+
+
+    public Airport getDepartureAirport() {
         return departureAirport;
     }
-    public void setDepartureAirport(String departureAirport) {
+
+    public void setDepartureAirport(Airport departureAirport) {
         this.departureAirport = departureAirport;
     }
 
-    public String getArrivalAirport() {
+    public Airport getArrivalAirport() {
         return arrivalAirport;
     }
-    public void setArrivalAirport(String arrivalAirport) {
+
+    public void setArrivalAirport(Airport arrivalAirport) {
         this.arrivalAirport = arrivalAirport;
     }
 
@@ -90,8 +106,8 @@ public class Flight {
     public String toString() {
         return "Flight{" +
                 "id=" + id +
-                ", departureAirport='" + departureAirport + '\'' +
-                ", arrivalAirport='" + arrivalAirport + '\'' +
+                ", departureAirport=" + departureAirport +
+                ", arrivalAirport=" + arrivalAirport +
                 ", departureTime='" + departureTime + '\'' +
                 ", arrivalTime='" + arrivalTime + '\'' +
                 ", price=" + price +
