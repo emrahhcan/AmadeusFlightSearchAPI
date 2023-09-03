@@ -6,11 +6,13 @@ import com.emrahcansahinoglu.flightsearch.repositories.IFlightRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class FlightService {
-    @Autowired
     private final IFlightRepository iFlightRepository;
 
     @Autowired
@@ -21,6 +23,7 @@ public class FlightService {
     public List<Flight> getAllFlights() {
         return iFlightRepository.findAll();
     }
+
 
     public Flight getFlightById(Long id) {
         return iFlightRepository.findById(id).orElseThrow(() -> new FlightNotFoundException());
