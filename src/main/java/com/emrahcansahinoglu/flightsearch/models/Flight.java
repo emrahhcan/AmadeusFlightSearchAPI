@@ -3,14 +3,13 @@ package com.emrahcansahinoglu.flightsearch.models;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table(name = "flights")
 public class Flight {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "departureAirportId")
@@ -20,20 +19,23 @@ public class Flight {
     @JoinColumn(name = "arrivalAirportId")
     private Airport arrivalAirport;
 
-    @Column(name = "departureTime")
+    @Column(name = "departureTime", nullable = false)
     private LocalDateTime departureTime;
 
-    @Column(name = "arrivalTime")
+    @Column(name = "arrivalTime", nullable = false)
     private LocalDateTime arrivalTime;
 
-    @Column(name = "price")
+    @Column(name = "price", nullable = false)
     private double price;
 
-    @Column(name = "currency")
+    @Column(name = "currency", nullable = false)
     private String currency;
 
-    public Flight() {}
-    public Flight(Airport departureAirport, Airport arrivalAirport, LocalDateTime departureTime, LocalDateTime arrivalTime, double price, String currency) {
+    public Flight() {
+    }
+
+    public Flight(Airport departureAirport, Airport arrivalAirport, LocalDateTime departureTime,
+            LocalDateTime arrivalTime, double price, String currency) {
         this.departureAirport = departureAirport;
         this.arrivalAirport = arrivalAirport;
         this.departureTime = departureTime;
@@ -65,6 +67,7 @@ public class Flight {
     public LocalDateTime getDepartureTime() {
         return departureTime;
     }
+
     public void setDepartureTime(LocalDateTime departureTime) {
         this.departureTime = departureTime;
     }
@@ -72,6 +75,7 @@ public class Flight {
     public LocalDateTime getArrivalTime() {
         return arrivalTime;
     }
+
     public void setArrivalTime(LocalDateTime arrivalTime) {
         this.arrivalTime = arrivalTime;
     }
@@ -79,6 +83,7 @@ public class Flight {
     public double getPrice() {
         return price;
     }
+
     public void setPrice(double price) {
         this.price = price;
     }
@@ -86,6 +91,7 @@ public class Flight {
     public String getCurrency() {
         return currency;
     }
+
     public void setCurrency(String currency) {
         this.currency = currency;
     }

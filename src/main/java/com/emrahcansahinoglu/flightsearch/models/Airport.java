@@ -11,16 +11,18 @@ public class Airport {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "city")
+    @Column(name = "city", nullable = false)
     private String city;
 
-    @OneToMany(mappedBy = "departureAirport")
+    @OneToMany(mappedBy = "departureAirport", cascade = CascadeType.ALL)
     private List<Flight> outgoingFlights;
 
-    @OneToMany(mappedBy = "arrivalAirport")
+    @OneToMany(mappedBy = "arrivalAirport", cascade = CascadeType.ALL)
     private List<Flight> incomingFlights;
 
-    public Airport() {}
+    public Airport() {
+    }
+
     public Airport(Long id, String city) {
         this.id = id;
         this.city = city;
@@ -33,6 +35,7 @@ public class Airport {
     public String getCity() {
         return city;
     }
+
     public void setCity(String city) {
         this.city = city;
     }

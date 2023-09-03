@@ -6,9 +6,6 @@ import com.emrahcansahinoglu.flightsearch.repositories.IFlightRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,7 +21,6 @@ public class FlightService {
         return iFlightRepository.findAll();
     }
 
-
     public Flight getFlightById(Long id) {
         return iFlightRepository.findById(id).orElseThrow(() -> new FlightNotFoundException());
     }
@@ -33,7 +29,19 @@ public class FlightService {
         return iFlightRepository.save(flight);
     }
 
-    public void deleteFlight(Long id) {
+    public void deleteFlightById(Long id) {
         iFlightRepository.deleteById(id);
+    }
+
+    public Flight updateFlight(Long id, Flight flight) {
+        Flight flightToUpdate = iFlightRepository.findById(id).orElseThrow(() -> new FlightNotFoundException());
+
+        flightToUpdate.setDepartureAirport(flight.getDepartureAirport());
+        flightToUpdate.setArrivalAirport(flight.getArrivalAirport());
+        flightToUpdate.setDepartureTime(flight.getDepartureTime());
+        flightToUpdate.setArrivalTime(flight.getArrivalTime());
+        flightToUpdate.setPrice(flight.getPrice());
+
+        return iFlightRepository.save(flightToUpdate);
     }
 }
