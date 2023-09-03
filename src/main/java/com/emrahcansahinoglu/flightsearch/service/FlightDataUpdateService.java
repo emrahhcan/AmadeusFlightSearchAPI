@@ -2,7 +2,6 @@ package com.emrahcansahinoglu.flightsearch.service;
 
 import com.emrahcansahinoglu.flightsearch.models.Airport;
 import com.emrahcansahinoglu.flightsearch.models.Flight;
-import com.emrahcansahinoglu.flightsearch.utils.FlightResponse;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,8 +10,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.HashMap;
-
 @Service
 public class FlightDataUpdateService {
     private final FlightService flightService;
@@ -20,7 +17,8 @@ public class FlightDataUpdateService {
     private final RestTemplate restTemplate;
 
     @Autowired
-    public FlightDataUpdateService(FlightService flightService, AirportService airportService, RestTemplate restTemplate) {
+    public FlightDataUpdateService(FlightService flightService, AirportService airportService,
+            RestTemplate restTemplate) {
         this.flightService = flightService;
         this.airportService = airportService;
         this.restTemplate = restTemplate;
