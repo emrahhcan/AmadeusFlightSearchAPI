@@ -35,7 +35,7 @@ public class FlightDataUpdateService {
     }
 
     public void updateFlightData() {
-        String apiUrl = "http://localhost:3000/api/v1/flights";
+        String apiUrl = "https://flight-data-mock-api.oa.r.appspot.com/api/v1/flights";
         ResponseEntity<Flight[]> response = restTemplate.getForEntity(apiUrl, Flight[].class);
 
         if (response.getStatusCode() == HttpStatus.OK) {
